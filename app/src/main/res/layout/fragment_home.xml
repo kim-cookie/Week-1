@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/main"
+<LinearLayout android:id="@+id/main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- 🔼 상단 로고 + 텍스트 -->
     <LinearLayout
@@ -14,7 +14,8 @@
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:id="@+id/logoImage"
@@ -59,9 +60,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/search"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="12dp" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp" />
     </RelativeLayout>
 
 
