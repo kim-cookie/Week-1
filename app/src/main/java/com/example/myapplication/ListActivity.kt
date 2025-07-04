@@ -13,7 +13,7 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list)
 
         val cities = arrayListOf(
-            "seoul", "london", "busan", "tokyo", "osaka", "kyoto", "seattle", "LA", "moscow"
+            "아우터", "상의", "바지", "치마", "원피스", "양말", "모자", "신발", "잡화"
         )
 
         val citiesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, cities)
