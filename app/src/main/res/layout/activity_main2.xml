@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
     tools:context=".MainActivity2">
 
     <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:gravity="clip_horizontal|center"
+        android:numColumns="2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
