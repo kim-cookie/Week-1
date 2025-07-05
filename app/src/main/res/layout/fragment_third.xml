@@ -8,9 +8,10 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/cartText"
+        android:id="@+id/thirdText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:text="세번째탭"
         android:textColor="#000000" />
 </LinearLayout>

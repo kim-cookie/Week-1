@@ -12,29 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+
+        <!-- 앱 시작: 로그인 화면 -->
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".Product"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".tab2"-->
-<!--            android:configChanges="orientation|keyboardHidden|screenSize"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/title_activity_fullscreen"-->
-<!--            android:theme="@style/Theme.MyApplication.Fullscreen" />-->
-        <activity android:name=".MainAppActivity" />
-        <activity android:name=".MainActivity"
-            android:exported="true">
+            android:name=".LoginActivity"
+            android:exported="true"> <!-- 반드시 exported="true" 필요 (Launcher) -->
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TabbedActivity" />
-        <activity android:name=".ListActivity" />
-        <activity android:name=".CartActivity" />
+
+        <!-- 로그인 성공 후 진입할 메인 탭 액티비티 -->
+        <activity
+            android:name=".MainAppActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

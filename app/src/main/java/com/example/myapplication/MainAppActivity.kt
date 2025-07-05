@@ -18,6 +18,7 @@ class MainAppActivity : AppCompatActivity() {
             val selected = when (item.itemId) {
                 R.id.nav_home -> HomeFragment()
                 R.id.nav_cart -> CartFragment()
+                R.id.nav_thrid -> ThirdFragment()
                 else -> null
             }
             selected?.let {

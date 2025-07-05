@@ -21,13 +21,6 @@ class HomeFragment : Fragment() {
         val listView = view.findViewById<ListView>(R.id.myListView)
         listView.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, cities)
 
-        listView.setOnItemClickListener { _, _, position, _ ->
-            if (cities[position] == "아우터") {
-                val intent = Intent(requireContext(), OuterActivity::class.java)
-                startActivity(intent)
-            }
-        }
-
         return view
     }
 }
