@@ -17,6 +17,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"> <!-- 반드시 exported="true" 필요 (Launcher) -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,7 +28,6 @@
         <activity
             android:name=".MainAppActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>
