@@ -26,6 +26,7 @@ class ImageListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_image_list, container, false)
+
         val selectedCategory = arguments?.getString(ARG_CATEGORY)
 
         val outerwearList = arrayListOf(
