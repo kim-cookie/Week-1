@@ -4,13 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="16dp">
 
+    <!-- 장바구니 목록 -->
+    <ListView
+        android:id="@+id/cartListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="40dp" />
+
+    <!-- 총 가격 -->
     <TextView
-        android:id="@+id/cartText"
-        android:layout_width="wrap_content"
+        android:id="@+id/totalPriceText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="#000000" />
+        android:text="총 가격: ₩0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="end"
+        android:layout_marginTop="8dp" />
+
+    <!-- 구매 버튼 -->
+    <Button
+        android:id="@+id/btnCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="구매하기"
+        android:layout_marginTop="12dp"/>
 </LinearLayout>
