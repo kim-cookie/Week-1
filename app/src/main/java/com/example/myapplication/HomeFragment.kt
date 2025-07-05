@@ -21,6 +21,19 @@ class HomeFragment : Fragment() {
         val listView = view.findViewById<ListView>(R.id.myListView)
         listView.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, cities)
 
+        // ✅ 항목 클릭 시 ImageListActivity로 이동하고 category 전달
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = cities[position]
+
+            val fragment = ImageListFragment.newInstance(selectedItem)
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null) // ← 뒤로가기 시 되돌아갈 수 있게
+                .commit()
+        }
+
+
         return view
     }
 }
