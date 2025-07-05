@@ -61,6 +61,8 @@ class MainActivity2 : AppCompatActivity() {
         val gridView = findViewById<GridView>(R.id.gridView)
         gridView.adapter = ProductAdapter(this, productList)
 
+        
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

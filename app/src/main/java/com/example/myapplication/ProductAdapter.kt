@@ -1,13 +1,18 @@
 package com.example.myapplication
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 
 class ProductAdapter(
     private val context: Context,
@@ -33,14 +38,91 @@ class ProductAdapter(
         textViewName.text = product.name
         textViewPrice.text = product.price
 
-//        imageView.setOnClickListener {
-//            val intent = Intent(context, ProductDetailActivity::class.java).apply {
-//                putExtra("name", product.name)
-//                putExtra("price", product.price)
-//                putExtra("image", product.image)
-//            }
-//            context.startActivity(intent)
+        productView.setOnClickListener {
+            val dialog = Dialog(context)
+            dialog.setContentView(R.layout.product_detail_popup)
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+            val image = dialog.findViewById<ImageView>(R.id.popupImage)
+            val name = dialog.findViewById<TextView>(R.id.popupName)
+            val price = dialog.findViewById<TextView>(R.id.popupPrice)
+            val sizeSpinner = dialog.findViewById<Spinner>(R.id.popupSizeSpinner)
+            val quantityText = dialog.findViewById<TextView>(R.id.quantityText)
+            val btnDecrease = dialog.findViewById<Button>(R.id.btnDecrease)
+            val btnIncrease = dialog.findViewById<Button>(R.id.btnIncrease)
+            val totalPriceText = dialog.findViewById<TextView>(R.id.totalPriceText)
+            val btnAddToCart = dialog.findViewById<Button>(R.id.btnAddToCart)
+
+            val sizes = arrayOf("S", "M", "L", "XL")
+            sizeSpinner.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, sizes)
+
+            var quantity = 1
+            quantityText.text = quantity.toString()
+
+            fun updateTotalPrice() {
+                // ₩ 기호 제거 후 숫자로 변환
+                val unitPrice = product.price.replace("₩", "").replace(",", "").toInt()
+                val total = unitPrice * quantity
+                totalPriceText.text = "총 ₩%,d".format(total)
+            }
+
+            updateTotalPrice()
+
+            btnDecrease.setOnClickListener {
+                if (quantity > 1) {
+                    quantity--
+                    quantityText.text = quantity.toString()
+                    updateTotalPrice()
+                }
+            }
+
+            btnIncrease.setOnClickListener {
+                quantity++
+                quantityText.text = quantity.toString()
+                updateTotalPrice()
+            }
+
+            image.setImageResource(product.image)
+            name.text = product.name
+            price.text = product.price
+
+            btnAddToCart.setOnClickListener {
+                val selectedSize = sizeSpinner.selectedItem.toString()
+
+                // 예시: 장바구니에 저장할 데이터
+                val cartItem = CartItem(
+                    name = product.name,
+                    price = product.price,
+                    image = product.image,
+                    size = selectedSize,
+                    quantity = quantity
+                )
+                CartManager.addItem(cartItem)
+
+                Toast.makeText(context, "장바구니에 추가되었습니다!", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+
+            dialog.show()
+
+        }
+
+
+//        productView.setOnClickListener {
+//            val dialog = Dialog(context)
+//            dialog.setContentView(R.layout.product_detail_popup)
+//
+//            val popupImage = dialog.findViewById<ImageView>(R.id.popupImage)
+//            val popupName = dialog.findViewById<TextView>(R.id.popupName)
+//            val popupPrice = dialog.findViewById<TextView>(R.id.popupPrice)
+//
+//            popupImage.setImageResource(product.image)
+//            popupName.text = product.name
+//            popupPrice.text = product.price
+//
+//            dialog.show()
 //        }
+
 
         return productView
     }
