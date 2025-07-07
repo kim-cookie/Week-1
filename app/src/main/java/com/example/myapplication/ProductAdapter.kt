@@ -127,17 +127,28 @@ class ProductAdapter(
 
 // 클릭 이벤트: 찜 toggle
         heartIcon.setOnClickListener {
+            val userId = UserManager.getLoggedInUser(context)?.id
+
+            if (userId == null) {
+                Toast.makeText(context, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             product.isLiked = !product.isLiked
 
+            // 현재 위시리스트 불러오기
+            val wishlist = WishlistManager.getWishlist(context, userId)
+
             if (product.isLiked) {
-                ProductData.wishlist.add(product)
+                if (!wishlist.contains(product)) wishlist.add(product)
             } else {
-                ProductData.wishlist.remove(product)
+                wishlist.remove(product)
             }
+
+            WishlistManager.saveWishlist(context, userId, wishlist)
 
             notifyDataSetChanged()
         }
-
         return productView
     }
 }

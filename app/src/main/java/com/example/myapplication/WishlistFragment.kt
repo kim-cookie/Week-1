@@ -20,8 +20,17 @@ class WishlistFragment : Fragment() {
 
         val gridView = view.findViewById<GridView>(R.id.gridViewWishlist)
         val emptyText = view.findViewById<TextView>(R.id.emptyTextView)
+        val backButton = view.findViewById<ImageView>(R.id.backButton)
 
-        val wishlist = ProductData.wishlist
+        val userId = UserManager.getLoggedInUser(requireContext())?.id
+        if (userId == null) {
+            emptyText.text = "로그인이 필요합니다."
+            emptyText.visibility = View.VISIBLE
+            gridView.visibility = View.GONE
+            return view
+        }
+
+        val wishlist = WishlistManager.getWishlist(requireContext(), userId)
 
         if (wishlist.isEmpty()) {
             emptyText.visibility = View.VISIBLE
@@ -33,9 +42,8 @@ class WishlistFragment : Fragment() {
             gridView.adapter = adapter
         }
 
-        val backButton = view.findViewById<ImageView>(R.id.backButton)
         backButton.setOnClickListener {
-            parentFragmentManager.popBackStack()  // ← 이전 Fragment(ImageListFragment)로 되돌아감
+            parentFragmentManager.popBackStack()
         }
 
         return view
