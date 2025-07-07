@@ -29,51 +29,42 @@ class ImageListFragment : Fragment() {
 
         val selectedCategory = arguments?.getString(ARG_CATEGORY)
 
-        val outerwearList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple)
-        )
-        val topsList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple)
-        )
-        val pantsList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple)
-        )
-        val skirtsList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple)
-        )
-        val dressesList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple)
-        )
-        val socksList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple)
-        )
-        val hatsList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple)
-        )
-        val shoesList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple)
-        )
-        val accessoriesList = arrayListOf(
-            Product("사과", "₩1,000", R.drawable.apple),
-            Product("오렌지", "₩1,400", R.drawable.orange),
-            Product("바지", "₩1,400", R.drawable.pants)
-        )
-
         val productList = when (selectedCategory) {
-            "아우터" -> outerwearList
-            "상의" -> topsList
-            "바지" -> pantsList
-            "치마" -> skirtsList
-            "원피스" -> dressesList
-            "양말" -> socksList
-            "모자" -> hatsList
-            "신발" -> shoesList
-            "잡화" -> accessoriesList
+            "아우터" -> ProductData.outerwearList
+            "상의" -> ProductData.topList
+            "바지" -> ProductData.pantsList
+//            "치마" -> ProductData.skirtsList
+//            "원피스" -> ProductData.dressesList
+//            "양말" -> ProductData.socksList
+//            "모자" -> ProductData.hatsList
+//            "신발" -> ProductData.shoesList
+//            "잡화" -> ProductData.accessoriesList
             else -> arrayListOf()
         }
 
+        // 보여줄 리스트는 mutableList로 복사
+        val currentList = productList.toMutableList()
+        val adapter = ProductAdapter(requireContext(), currentList)
+
         val gridView = view.findViewById<GridView>(R.id.gridView)
-        gridView.adapter = ProductAdapter(requireContext(), productList)
+        gridView.adapter = adapter
+
+        val searchEditText = view.findViewById<android.widget.EditText>(R.id.searchEditText)
+        val searchIcon = view.findViewById<android.widget.ImageView>(R.id.searchIcon)
+
+        searchIcon.setOnClickListener {
+            val query = searchEditText.text.toString().trim()
+
+            val filtered = if (query.isEmpty()) {
+                productList
+            } else {
+                productList.filter { it.name.contains(query, ignoreCase = true) }
+            }
+
+            currentList.clear()
+            currentList.addAll(filtered)
+            adapter.notifyDataSetChanged()
+        }
 
         return view
     }

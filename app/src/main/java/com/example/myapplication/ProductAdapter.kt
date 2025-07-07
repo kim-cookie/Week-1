@@ -16,7 +16,7 @@ import android.widget.Toast
 
 class ProductAdapter(
     private val context: Context,
-    private val productList: ArrayList<Product>
+    private val productList: MutableList<Product>
 ) : BaseAdapter() {
 
     override fun getCount(): Int = productList.size
