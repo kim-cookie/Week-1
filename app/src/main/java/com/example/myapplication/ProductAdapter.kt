@@ -16,7 +16,8 @@ import android.widget.Toast
 
 class ProductAdapter(
     private val context: Context,
-    private val productList: MutableList<Product>
+    private val productList: MutableList<Product>,
+    private val onWishlistChanged: (() -> Unit)? = null  // ✨ 콜백 추가
 ) : BaseAdapter() {
 
     override fun getCount(): Int = productList.size
@@ -136,17 +137,18 @@ class ProductAdapter(
 
             product.isLiked = !product.isLiked
 
-            // 현재 위시리스트 불러오기
             val wishlist = WishlistManager.getWishlist(context, userId)
 
             if (product.isLiked) {
                 if (!wishlist.contains(product)) wishlist.add(product)
             } else {
                 wishlist.remove(product)
+                //  위시리스트에서 삭제되었으므로 productList에서도 제거 필요 (만약 이 화면이 wishlist 화면이라면)
+                productList.remove(product)
+                onWishlistChanged?.invoke()  //  콜백으로 변경
             }
 
             WishlistManager.saveWishlist(context, userId, wishlist)
-
             notifyDataSetChanged()
         }
         return productView

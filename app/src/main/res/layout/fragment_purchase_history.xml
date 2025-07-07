@@ -4,19 +4,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:gravity="center"
     android:padding="16dp">
 
-    <!-- 상단 안내 텍스트 -->
+    <!-- 🔼 상단 로고 + 텍스트 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logoimage"
+            android:contentDescription="Logo" />
+
+        <TextView
+            android:id="@+id/shopText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHOP!"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:textColor="#000" />
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/purchaseTitle"
+        android:id="@+id/categoryLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="구매내역"
-        android:textSize="20sp"
+        android:text="카테고리"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="@color/white"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:background="@drawable/category_box"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp" />
 
     <ListView
         android:id="@+id/purchaseListView"

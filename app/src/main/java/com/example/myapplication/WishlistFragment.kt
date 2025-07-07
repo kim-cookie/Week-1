@@ -32,15 +32,24 @@ class WishlistFragment : Fragment() {
 
         val wishlist = WishlistManager.getWishlist(requireContext(), userId)
 
-        if (wishlist.isEmpty()) {
-            emptyText.visibility = View.VISIBLE
-            gridView.visibility = View.GONE
-        } else {
-            emptyText.visibility = View.GONE
-            gridView.visibility = View.VISIBLE
-            val adapter = ProductAdapter(requireContext(), wishlist)
-            gridView.adapter = adapter
+        fun updateUI() {
+            if (wishlist.isEmpty()) {
+                emptyText.visibility = View.VISIBLE
+                gridView.visibility = View.GONE
+            } else {
+                emptyText.visibility = View.GONE
+                gridView.visibility = View.VISIBLE
+                val adapter = ProductAdapter(requireContext(), wishlist)
+                gridView.adapter = adapter
+            }
         }
+
+        val adapter = ProductAdapter(requireContext(),wishlist) {
+            updateUI()
+        }
+
+        gridView.adapter = adapter
+        updateUI()
 
         backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
