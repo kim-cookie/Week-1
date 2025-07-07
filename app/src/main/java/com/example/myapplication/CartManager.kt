@@ -15,6 +15,10 @@ object CartManager {
         cartList.remove(item)
     }
 
+    fun removeAll(items: List<CartItem>) {
+        cartList.removeAll(items)
+    }
+
     fun clearCart() {
         cartList.clear()
     }

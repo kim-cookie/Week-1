@@ -15,13 +15,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class CartFragment : Fragment() {
 
-    private lateinit var listView: ListView
+    private lateinit var cartListView: ListView
     private lateinit var totalPriceText: TextView
     private lateinit var btnCheckout: Button
+    private lateinit var cartAdapter: CartItemAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +32,7 @@ class CartFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_cart, container, false)
 
-        listView = view.findViewById(R.id.cartListView)
+        cartListView = view.findViewById(R.id.cartListView)
         totalPriceText = view.findViewById(R.id.totalPriceText)
         btnCheckout = view.findViewById(R.id.btnCheckout)
 
@@ -38,7 +41,7 @@ class CartFragment : Fragment() {
         val adapter = CartItemAdapter(requireContext(), cartItems.toMutableList()) {
             updateTotalPrice()
         }
-        listView.adapter = adapter
+        cartListView.adapter = adapter
 
         // 총 가격 계산 및 표시
         updateTotalPrice()
@@ -58,7 +61,7 @@ class CartFragment : Fragment() {
                 toggleBtn.text = "전체"
             }
 
-            adapter.notifyDataSetChanged()
+            cartListView.adapter = adapter
             updateTotalPrice()
         }
 
@@ -74,6 +77,20 @@ class CartFragment : Fragment() {
 
         return view
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        // 장바구니 리스트 갱신
+        cartAdapter = CartItemAdapter(requireContext(), CartManager.getItems().toMutableList()) {
+            updateTotalPrice()
+        }
+        cartListView.adapter = cartAdapter
+
+        // 총 가격도 다시 계산
+        updateTotalPrice()
+    }
+
 
     private fun updateTotalPrice() {
         val cartItems = CartManager.getItems()
@@ -123,7 +140,7 @@ class CartFragment : Fragment() {
 
                 item?.let {
                     val totalPrice = it.price.replace("₩", "").replace(",", "").toInt() * it.quantity
-                    totalPricePerItemText.text = "₩$totalPrice"
+                    totalPricePerItemText.text = "₩%,d".format(totalPrice)
                     imageView.setImageResource(it.image)
                 }
 
@@ -135,10 +152,10 @@ class CartFragment : Fragment() {
 
         // 총 금액 계산
         val total = selectedItems.sumOf { it.price.replace("₩", "").replace(",", "").toInt() * it.quantity }
-        totalPriceText.text = "총 금액: ₩$total"
+        totalPriceText.text = "총 금액: ₩%,d".format(total)
 
         var finalPrice = total
-        finalPriceText.text = "최종 금액: ₩$finalPrice"
+        finalPriceText.text = "최종 금액: ₩%,d".format(finalPrice)
 
         // 할인 옵션 설정
         val discountOptions = listOf("선택 안 함", "5% 할인", "10% 할인", "₩10,000 할인")
@@ -159,22 +176,37 @@ class CartFragment : Fragment() {
                     3 -> (total - 10000).coerceAtLeast(0)
                     else -> total
                 }
-                finalPriceText.text = "최종 금액: ₩$finalPrice"
+                finalPriceText.text = "최종 금액: ₩%,d".format(finalPrice)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 finalPrice = total
-                finalPriceText.text = "최종 금액: ₩$finalPrice"
+                finalPriceText.text = "최종 금액: ₩%,d".format(finalPrice)
             }
         }
 
         // 결제 버튼 동작 (예시)
         confirmBtn.setOnClickListener {
             Toast.makeText(requireContext(), "결제 완료!", Toast.LENGTH_SHORT).show()
-            dialog.dismiss()
 
-            // 필요 시 다음 화면 이동 등 처리
-            // findNavController().navigate(...)
+            CartManager.removeAll(selectedItems)
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val now = dateFormat.format(Date())
+
+            selectedItems.forEach {
+                it.purchaseDate = now
+            }
+            PurchaseManager.addAll(selectedItems)
+
+            dialog.dismiss()
+        }
+
+        dialog.setOnDismissListener {
+            cartAdapter = CartItemAdapter(requireContext(), CartManager.getItems().toMutableList()) {
+                updateTotalPrice()
+            }
+            cartListView.adapter = cartAdapter
+            updateTotalPrice()
         }
 
         dialog.show()
