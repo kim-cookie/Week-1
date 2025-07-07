@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- 수정된 LinearLayout 구조 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +8,7 @@
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- 🔼 상단 로고 + 텍스트 -->
+    <!-- 🔼 상단 로고 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,13 +36,14 @@
             android:textColor="#000" />
     </LinearLayout>
 
+    <!-- 🔍 검색창 -->
     <RelativeLayout
-        android:layout_marginBottom="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/search_box"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:padding="8dp">
 
         <EditText
@@ -65,11 +67,12 @@
             android:layout_marginEnd="12dp" />
     </RelativeLayout>
 
-    <!-- 이미지 그리드뷰 -->
+    <!-- 🖼 GridView (전체 화면 차지) -->
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:numColumns="2"
         android:verticalSpacing="16dp"
         android:horizontalSpacing="16dp"
