@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,7 +45,7 @@ class ImageListFragment : Fragment() {
 
         // 보여줄 리스트는 mutableList로 복사
         val currentList = productList.toMutableList()
-        val adapter = ProductAdapter(requireContext(), currentList)
+        val adapter = ProductAdapter(requireContext(), currentList, isWishlistScreen = false)
 
         val gridView = view.findViewById<GridView>(R.id.gridView)
         gridView.adapter = adapter

@@ -2,23 +2,21 @@ package com.example.myapplication
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.*
 import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 
 class ProductAdapter(
     private val context: Context,
     private val productList: MutableList<Product>,
-    private val onWishlistChanged: (() -> Unit)? = null  // ✨ 콜백 추가
+    private val onWishlistChanged: (() -> Unit)? = null,
+    private val isWishlistScreen: Boolean
 ) : BaseAdapter() {
+
+    private val userId: String? = UserManager.getLoggedInUser(context)?.id
 
     override fun getCount(): Int = productList.size
 
@@ -34,10 +32,38 @@ class ProductAdapter(
         val imageView = productView.findViewById<ImageView>(R.id.imageView)
         val textViewName = productView.findViewById<TextView>(R.id.textViewName)
         val textViewPrice = productView.findViewById<TextView>(R.id.textViewPrice)
+        val heartIcon = productView.findViewById<ImageView>(R.id.heartIcon)
 
         imageView.setImageResource(product.image)
         textViewName.text = product.name
         textViewPrice.text = product.price
+
+        if (userId != null && WishlistManager.isLiked(context, userId, product)) {
+            heartIcon.setImageResource(R.drawable.heart_filled)
+        } else {
+            heartIcon.setImageResource(R.drawable.heart_outline)
+        }
+
+        heartIcon.setOnClickListener {
+            if (userId == null) {
+                Toast.makeText(context, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val isLikedNow = WishlistManager.isLiked(context, userId, product)
+            WishlistManager.toggleWishlist(context, userId, product)
+
+            heartIcon.setImageResource(
+                if (!isLikedNow) R.drawable.heart_filled else R.drawable.heart_outline
+            )
+
+            if (isLikedNow && isWishlistScreen) {
+                productList.remove(product)
+                onWishlistChanged?.invoke()
+            }
+
+            notifyDataSetChanged()
+        }
 
         productView.setOnClickListener {
             val dialog = Dialog(context)
@@ -55,13 +81,13 @@ class ProductAdapter(
             val btnAddToCart = dialog.findViewById<Button>(R.id.btnAddToCart)
 
             val sizes = arrayOf("S", "M", "L", "XL")
-            sizeSpinner.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, sizes)
+            sizeSpinner.adapter =
+                ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, sizes)
 
             var quantity = 1
             quantityText.text = quantity.toString()
 
             fun updateTotalPrice() {
-                // ₩ 기호 제거 후 숫자로 변환
                 val unitPrice = product.price.replace("₩", "").replace(",", "").toInt()
                 val total = unitPrice * quantity
                 totalPriceText.text = "총 ₩%,d".format(total)
@@ -89,8 +115,6 @@ class ProductAdapter(
 
             btnAddToCart.setOnClickListener {
                 val selectedSize = sizeSpinner.selectedItem.toString()
-
-                // 예시: 장바구니에 저장할 데이터
                 val cartItem = CartItem(
                     name = product.name,
                     price = product.price,
@@ -115,42 +139,8 @@ class ProductAdapter(
             }
 
             dialog.show()
-
         }
 
-        val heartIcon = productView.findViewById<ImageView>(R.id.heartIcon)
-
-// 초기 아이콘 상태 설정
-        heartIcon.setImageResource(
-            if (product.isLiked) R.drawable.heart_filled
-            else R.drawable.heart_outline
-        )
-
-// 클릭 이벤트: 찜 toggle
-        heartIcon.setOnClickListener {
-            val userId = UserManager.getLoggedInUser(context)?.id
-
-            if (userId == null) {
-                Toast.makeText(context, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            product.isLiked = !product.isLiked
-
-            val wishlist = WishlistManager.getWishlist(context, userId)
-
-            if (product.isLiked) {
-                if (!wishlist.contains(product)) wishlist.add(product)
-            } else {
-                wishlist.remove(product)
-                //  위시리스트에서 삭제되었으므로 productList에서도 제거 필요 (만약 이 화면이 wishlist 화면이라면)
-                productList.remove(product)
-                onWishlistChanged?.invoke()  //  콜백으로 변경
-            }
-
-            WishlistManager.saveWishlist(context, userId, wishlist)
-            notifyDataSetChanged()
-        }
         return productView
     }
 }

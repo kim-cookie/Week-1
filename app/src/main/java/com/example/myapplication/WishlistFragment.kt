@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class WishlistFragment : Fragment() {
+
+    private lateinit var adapter: ProductAdapter
+    private lateinit var wishlist: MutableList<Product>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,31 +32,31 @@ class WishlistFragment : Fragment() {
             return view
         }
 
-        val wishlist = WishlistManager.getWishlist(requireContext(), userId)
+        wishlist = WishlistManager.getWishlist(requireContext(), userId)
 
-        fun updateUI() {
-            if (wishlist.isEmpty()) {
-                emptyText.visibility = View.VISIBLE
-                gridView.visibility = View.GONE
-            } else {
-                emptyText.visibility = View.GONE
-                gridView.visibility = View.VISIBLE
-                val adapter = ProductAdapter(requireContext(), wishlist)
-                gridView.adapter = adapter
-            }
-        }
-
-        val adapter = ProductAdapter(requireContext(),wishlist) {
-            updateUI()
-        }
+        adapter = ProductAdapter(requireContext(), wishlist, {
+            // 콜백: 위시리스트가 변경되었을 때 실행됨
+            adapter.notifyDataSetChanged()
+            updateEmptyTextVisibility(emptyText, gridView)
+        }, isWishlistScreen = true)
 
         gridView.adapter = adapter
-        updateUI()
+        updateEmptyTextVisibility(emptyText, gridView)
 
         backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
         return view
+    }
+
+    private fun updateEmptyTextVisibility(emptyText: TextView, gridView: GridView) {
+        if (wishlist.isEmpty()) {
+            emptyText.visibility = View.VISIBLE
+            gridView.visibility = View.GONE
+        } else {
+            emptyText.visibility = View.GONE
+            gridView.visibility = View.VISIBLE
+        }
     }
 }
