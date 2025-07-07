@@ -4,14 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/white"
+    >
+
+    <!-- 🔼 상단 로고 + 텍스트 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logoimage"
+            android:contentDescription="Logo" />
+
+        <TextView
+            android:id="@+id/shopText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHOP!"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:textColor="#000" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnToggleSelectAll"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_gravity="end"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/button_outline"
         android:text="전체"
         android:textSize="12sp"
@@ -22,6 +53,7 @@
     <ListView
         android:id="@+id/cartListView"
         android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
@@ -34,7 +66,9 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="end"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="25dp"
+        />
 
     <TextView
         android:id="@+id/cartText"
@@ -51,5 +85,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="구매하기"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:radius="15dp"
+        android:backgroundTint="@color/orange"/>
 </LinearLayout>

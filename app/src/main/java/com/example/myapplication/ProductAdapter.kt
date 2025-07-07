@@ -107,6 +107,26 @@ class ProductAdapter(
 
         }
 
+        val heartIcon = productView.findViewById<ImageView>(R.id.heartIcon)
+
+// 초기 아이콘 상태 설정
+        heartIcon.setImageResource(
+            if (product.isLiked) R.drawable.heart_filled
+            else R.drawable.heart_outline
+        )
+
+// 클릭 이벤트: 찜 toggle
+        heartIcon.setOnClickListener {
+            product.isLiked = !product.isLiked
+
+            if (product.isLiked) {
+                ProductData.wishlist.add(product)
+            } else {
+                ProductData.wishlist.remove(product)
+            }
+
+            notifyDataSetChanged()
+        }
 
         return productView
     }

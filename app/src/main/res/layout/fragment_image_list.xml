@@ -65,7 +65,18 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="12dp" />
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnWishlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:text="위시리스트 보기"
+        android:backgroundTint="@color/orange"
+        android:layout_gravity="end"
+        android:drawableStart="@drawable/banana"/>
 
     <!-- 🖼 GridView (전체 화면 차지) -->
     <GridView

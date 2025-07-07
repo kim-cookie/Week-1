@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="12dp">
 
+
     <!-- 체크박스 -->
     <CheckBox
         android:id="@+id/itemCheckBox"
