@@ -1,9 +1,12 @@
 package com.example.myapplication
 
+import java.io.Serializable
+
 data class CartItem (
-    val name: String,
-    val price: String,
-    val image: Int,
-    val size: String,
-    val quantity: Int
-)
+    var name: String,
+    var price: String,
+    var image: Int,
+    var size: String,
+    var quantity: Int,
+    var isSelected: Boolean = false
+) : Serializable

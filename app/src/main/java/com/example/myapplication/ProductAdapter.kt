@@ -108,22 +108,6 @@ class ProductAdapter(
         }
 
 
-        productView.setOnClickListener {
-            val dialog = Dialog(context)
-            dialog.setContentView(R.layout.product_detail_popup)
-
-            val popupImage = dialog.findViewById<ImageView>(R.id.popupImage)
-            val popupName = dialog.findViewById<TextView>(R.id.popupName)
-            val popupPrice = dialog.findViewById<TextView>(R.id.popupPrice)
-
-            popupImage.setImageResource(product.image)
-            popupName.text = product.name
-            popupPrice.text = product.price
-
-            dialog.show()
-        }
-
-
         return productView
     }
 }

@@ -6,13 +6,24 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <Button
+        android:id="@+id/btnToggleSelectAll"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_outline"
+        android:text="전체"
+        android:textSize="12sp"
+        android:textColor="#000000"
+        android:padding="0dp" />
+
     <!-- 장바구니 목록 -->
     <ListView
         android:id="@+id/cartListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="40dp" />
+        android:layout_weight="1" />
 
     <!-- 총 가격 -->
     <TextView
