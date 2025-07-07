@@ -52,11 +52,15 @@ class CartItemAdapter(
         }
 
         deleteButton.setOnClickListener {
-            CartManager.removeItem(item)  // 외부 매니저에서도 삭제
-            cartItems.removeAt(position)  // 내부 리스트에서 삭제
-            notifyDataSetChanged()
-            onCartUpdated()
-            Toast.makeText(context, "삭제되었습니다", Toast.LENGTH_SHORT).show()
+            val userId = UserManager.getLoggedInUser(context)?.id
+            if (userId != null) {
+                CartManager.removeItem(item)
+                cartItems.removeAt(position)
+                CartManager.saveCart(context, userId, cartItems)
+                notifyDataSetChanged()
+                onCartUpdated()
+                Toast.makeText(context, "삭제되었습니다", Toast.LENGTH_SHORT).show()
+            }
         }
 
         view.setOnClickListener {
@@ -112,6 +116,11 @@ class CartItemAdapter(
                 val newSize = sizeSpinner.selectedItem.toString()
                 item.size = newSize
                 item.quantity = quantity
+
+                val userId = UserManager.getLoggedInUser(context)?.id
+                if (userId != null) {
+                    CartManager.saveCart(context, userId, cartItems)
+                }
 
                 notifyDataSetChanged()
                 onCartUpdated()
