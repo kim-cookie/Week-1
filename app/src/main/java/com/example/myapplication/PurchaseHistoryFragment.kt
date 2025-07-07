@@ -27,7 +27,9 @@ class PurchaseHistoryFragment : Fragment() {
     }
 
     private fun createDisplayList(): List<PurchaseDisplayItem> {
-        val grouped = PurchaseManager.getAll()
+        val userId = UserManager.getLoggedInUser(requireContext())?.id ?: return emptyList()
+
+        val grouped = PurchaseManager.getPurchases(requireContext(), userId)
             .groupBy { it.purchaseDate ?: "날짜 없음" }
             .toSortedMap(reverseOrder())
 

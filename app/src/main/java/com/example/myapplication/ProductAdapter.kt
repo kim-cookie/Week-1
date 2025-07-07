@@ -97,9 +97,19 @@ class ProductAdapter(
                     size = selectedSize,
                     quantity = quantity
                 )
-                CartManager.addItem(cartItem)
 
-                Toast.makeText(context, "장바구니에 추가되었습니다!", Toast.LENGTH_SHORT).show()
+                val userId = UserManager.getLoggedInUser(context)?.id
+                if (userId != null) {
+                    val currentCart = CartManager.getCart(context, userId).toMutableList()
+                    currentCart.add(cartItem)
+                    CartManager.saveCart(context, userId, currentCart)
+
+                    Toast.makeText(context, "장바구니에 추가되었습니다!", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(context, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
+
                 dialog.dismiss()
             }
 
