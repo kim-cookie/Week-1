@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.net.Uri
 import android.os.Build
+import android.view.LayoutInflater
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -65,27 +66,16 @@ fun CalendarScreen() {
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 24.dp, vertical = 16.dp)
-    ) {
-        // 상단 로고 + 텍스트
-        Row(
+    )
+    {
+        AndroidView(
+            factory = { inflaterContext ->
+                LayoutInflater.from(inflaterContext).inflate(R.layout.header_logo, null)
+            },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 28.dp, bottom = 18.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logoimage),
-                contentDescription = "Logo",
-                modifier = Modifier.size(44.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "SHOP!",
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-        }
+        )
+
 
         // 캘린더
         AndroidView(
