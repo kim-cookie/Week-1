@@ -7,10 +7,10 @@ object ProductData {
     val outerwearList = arrayListOf(
         Product("[DECA] 핸드메이드 울 하프 코트(DZBHC01)", "₩161,900", "android.resource://com.example.myapplication/drawable/o1"),
         Product("모리모리스 Morry Morris 언더 헤비 크롭 패딩", "₩138,000", "android.resource://com.example.myapplication/drawable/o2"),
-        Product("나이키 라이프 남성 풀집 언라인드 재킷", "₩182,700", "android.resource://com.example.myapplication/drawable/o3"),
+        Product("슈퍼서브 행식이 스트라이프 후드 집업 - 블루", "₩49,900", "android.resource://com.example.myapplication/drawable/o3"),
         Product("나이키 클럽 남성 오버사이즈 우븐 트랙 재킷 블랙", "₩109,000", "android.resource://com.example.myapplication/drawable/o4"),
         Product("페이릿 에닛 노카라 포인트 누빔패딩점퍼", "₩29,900", "android.resource://com.example.myapplication/drawable/o5"),
-        Product("남여공용 박시핏 스티치 포켓 카라 코튼 자켓 아우터 숏자켓 2color", "₩33,800", "android.resource://com.example.myapplication/drawable/o6"),
+        Product("디미트리블랙 2WAY OG 에센셜 페이드 워싱 미시간 데님 자켓_인디고", "₩33,800", "android.resource://com.example.myapplication/drawable/o6"),
         Product("라이더자켓 남자크롭자켓 남성가을아우터", "₩93,000", "android.resource://com.example.myapplication/drawable/o7"),
         Product("봄 가을 간절기 데일리룩 여성 스트링 야상 점퍼 아우터", "₩63,500", "android.resource://com.example.myapplication/drawable/o8"),
         Product("여자 테일러드 자켓 재킷 가을 소프트 바시티 간절기 BE3 아우터 크롭", "₩71,000", "android.resource://com.example.myapplication/drawable/o9"),
