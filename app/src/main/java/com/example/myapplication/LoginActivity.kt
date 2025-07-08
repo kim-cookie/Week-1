@@ -2,26 +2,32 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
-        val loginButton = findViewById<Button>(R.id.loginButton)
-        val signUpButton = findViewById<Button>(R.id.signupButton)
-
-        loginButton.setOnClickListener {
-            showLoginDialog()
-        }
-
-        signUpButton.setOnClickListener {
-            showSignUpDialog()
+        // Compose UI만 사용할 것이므로 XML 제거
+        setContent {
+            LoginScreen(
+                onLoginClick = { showLoginDialog() },
+                onSignUpClick = { showSignUpDialog() }
+            )
         }
     }
 
@@ -83,5 +89,43 @@ class LoginActivity : AppCompatActivity() {
             .setNegativeButton("취소", null)
             .show()
     }
+}
 
+@Composable
+fun LoginScreen(
+    onLoginClick: () -> Unit,
+    onSignUpClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "앱 로고",
+            modifier = Modifier
+                .size(200.dp)
+                .padding(bottom = 40.dp)
+        )
+
+        Button(
+            onClick = onLoginClick,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFED6B27))
+        ) {
+            Text(text = "로그인", color = Color.White)
+        }
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Button(
+            onClick = onSignUpClick,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFED6B27))
+        ) {
+            Text(text = "회원가입", color = Color.White)
+        }
+    }
 }

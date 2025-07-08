@@ -20,6 +20,7 @@ class MainAppActivity : AppCompatActivity() {
                 R.id.nav_cart -> CartFragment()
                 R.id.nav_thrid -> PurchaseHistoryFragment()
                 R.id.nav_info -> UserInfoFragment()
+                R.id.nav_calendar -> CalendarFragment()
                 else -> null
             }
             selected?.let {

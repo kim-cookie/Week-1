@@ -48,7 +48,6 @@ android {
 }
 
 dependencies {
-
     // Compose core
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
@@ -62,10 +61,12 @@ dependencies {
     // Navigation
     implementation(libs.navigation.compose)
 
+
     // 디버그용
     debugImplementation(libs.compose.ui.tooling)
 
 
+    implementation(libs.compose.material3)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

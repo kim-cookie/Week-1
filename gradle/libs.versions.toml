@@ -11,12 +11,13 @@ activity = "1.10.1"
 constraintlayout = "2.2.1"
 firebaseCrashlyticsBuildtools = "3.0.4"
 composeUi = "1.5.3"
-composeCompiler = "1.5.3"
 lifecycleRuntimeKtx = "2.6.2"
 navigationCompose = "2.7.1"
 activityCompose = "1.7.2"
+compose-material3 = "1.2.1"
 
 [libraries]
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "composeUi" }
 compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeUi" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "composeUi" }
