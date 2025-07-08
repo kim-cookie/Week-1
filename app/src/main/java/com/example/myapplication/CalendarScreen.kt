@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -113,14 +114,40 @@ fun CalendarScreen() {
             contentPadding = PaddingValues(bottom = 60.dp)
         ) {
             items(imagesForDate) { uri ->
-                Image(
-                    painter = rememberAsyncImagePainter(uri),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .aspectRatio(1f)
-                        .clip(RoundedCornerShape(16.dp))
-                )
+                Box(modifier = Modifier.aspectRatio(1f)) {
+                    Image(
+                        painter = rememberAsyncImagePainter(uri),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+
+                    IconButton(
+                        onClick = {
+                            val key = selectedDate.toString()
+                            val list = imageMap[key]
+                            list?.remove(uri)
+                            if (list != null) {
+                                imageMap[key] = list
+                                ImageStorage.saveUriList(context, userId, key, list)
+                            }
+                        },
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(4.dp)
+                            .size(20.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.delete),
+                            contentDescription = "삭제",
+                            tint = colorResource(id = R.color.orange),
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
             }
+
         }
     }
 }
