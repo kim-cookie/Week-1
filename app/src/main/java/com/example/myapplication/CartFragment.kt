@@ -14,6 +14,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -147,7 +148,7 @@ class CartFragment : Fragment() {
                     val totalPrice =
                         it.price.replace("₩", "").replace(",", "").toInt() * it.quantity
                     totalPricePerItemText.text = "₩%,d".format(totalPrice)
-                    imageView.setImageResource(it.image)
+                    Glide.with(context).load(it.image).into(imageView)
                 }
 
 

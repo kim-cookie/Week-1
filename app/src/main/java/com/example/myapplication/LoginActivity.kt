@@ -56,6 +56,8 @@ class LoginActivity : AppCompatActivity() {
         val editPw = dialogView.findViewById<EditText>(R.id.editPw)
         val editName = dialogView.findViewById<EditText>(R.id.editName)
         val editAddress = dialogView.findViewById<EditText>(R.id.editAddress)
+        val editEmail = dialogView.findViewById<EditText>(R.id.editEmail)
+        val editPhone = dialogView.findViewById<EditText>(R.id.editPhone)
 
         AlertDialog.Builder(this)
             .setTitle("회원가입")
@@ -65,12 +67,16 @@ class LoginActivity : AppCompatActivity() {
                 val pw = editPw.text.toString()
                 val name = editName.text.toString()
                 val address = editAddress.text.toString()
+                val email = editEmail.text.toString()
+                val phone = editPhone.text.toString()
 
                 val newUser = UserAccount().apply {
                     this.id = id
                     this.password = pw
                     this.name = name
                     this.address = address
+                    this.email = email
+                    this.phoneNumber = phone
                 }
 
                 val success = UserManager.signUp(this, newUser)
