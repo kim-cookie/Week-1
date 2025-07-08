@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:gravity="center"
-    android:padding="16dp">
+    android:gravity="end">
 
     <!-- 🔼 상단 로고 + 텍스트 -->
     <LinearLayout
@@ -36,20 +35,27 @@
             android:textColor="#000" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/categoryLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="카테고리"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:background="@drawable/category_box"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/categoryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/category_box"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:text="주문내역"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_gravity="end" /> <!-- 👈 왼쪽 정렬 핵심 -->
+    </FrameLayout>
+
 
     <ListView
         android:id="@+id/purchaseListView"

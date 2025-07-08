@@ -22,6 +22,7 @@
         android:layout_height="80dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@id/itemCheckBox"
+        app:circularflow_radiusInDP="15dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -84,10 +85,9 @@
         android:text="삭제"
         android:textSize="14sp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:backgroundTint="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/cartItemImage" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

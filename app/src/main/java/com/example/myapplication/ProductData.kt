@@ -28,7 +28,6 @@ object ProductData {
         Product("어센틱 로고 맨투맨 - 다크 네이비", "42,900", R.drawable.t8),
         Product("CGP 아치 로고 후드 집업_블랙", "51,800", R.drawable.t9),
         Product("어워드 셔츠_베이지", "88,000", R.drawable.t10),
-        Product("행텐 소프트 플란넬 체크 셔츠", "88,900", R.drawable.t6),
     )
 
     val pantsList = arrayListOf(

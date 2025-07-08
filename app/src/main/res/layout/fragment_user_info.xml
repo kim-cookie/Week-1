@@ -2,62 +2,91 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-<!-- ScrollView (회원 정보) -->
-<ScrollView
-    android:id="@+id/infoScroll"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:padding="24dp"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/logoutButton"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
+    <!-- 🔼 상단 로고 + 텍스트 -->
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logoimage"
+            android:contentDescription="Logo" />
 
         <TextView
-            android:text="회원 정보"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="16dp"
+            android:id="@+id/shopText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CCCCCC"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView android:id="@+id/idText" style="@style/UserInfoText"/>
-        <TextView android:id="@+id/nameText" style="@style/UserInfoText"/>
-        <TextView android:id="@+id/addressText" style="@style/UserInfoText"/>
-        <TextView android:id="@+id/emailText" style="@style/UserInfoText"/>
-        <TextView android:id="@+id/phoneText" style="@style/UserInfoText"/>
-        <TextView android:id="@+id/signUpDateText" style="@style/UserInfoText"/>
-        <TextView android:id="@+id/lastLoginDateText" style="@style/UserInfoText"/>
-
+            android:layout_height="wrap_content"
+            android:text="SHOP!"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:textColor="#000" />
     </LinearLayout>
-</ScrollView>
 
-<!-- 하단 고정 로그아웃 버튼 -->
-<Button
-    android:id="@+id/logoutButton"
-    android:text="로그아웃"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_margin="24dp"
-    android:backgroundTint="#ED6B27"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- ScrollView (회원 정보) -->
+    <ScrollView
+        android:id="@+id/infoScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="회원 정보"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView android:id="@+id/idText" style="@style/UserInfoText"/>
+            <TextView android:id="@+id/nameText" style="@style/UserInfoText"/>
+            <TextView android:id="@+id/addressText" style="@style/UserInfoText"/>
+            <TextView android:id="@+id/emailText" style="@style/UserInfoText"/>
+            <TextView android:id="@+id/phoneText" style="@style/UserInfoText"/>
+            <TextView android:id="@+id/signUpDateText" style="@style/UserInfoText"/>
+            <TextView android:id="@+id/lastLoginDateText" style="@style/UserInfoText"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 하단 고정 로그아웃 버튼 -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:text="로그아웃"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:backgroundTint="#ED6B27"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
