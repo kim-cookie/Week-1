@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.Context
 import android.net.Uri
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -32,31 +31,42 @@ import java.time.LocalDate
 fun CalendarScreen() {
     val context = LocalContext.current
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
+
     val imageMap = remember { mutableStateMapOf<String, SnapshotStateList<Uri>>() }
 
-    // SharedPreferences에서 기존 이미지 불러오기
-    LaunchedEffect(Unit) {
-        val savedMap = ImageStorage.loadAllUris(context)
+    // 유저 ID 불러오기 (기본값 guest)
+    val userId = remember {
+        UserManager.getLoggedInUser(context)?.id ?: "guest"
+    }
+
+    // 저장된 이미지 로딩
+    LaunchedEffect(userId) {
+        val savedMap = ImageStorage.loadAllUris(context, userId)
         savedMap.forEach { (date, uriList) ->
             imageMap[date] = uriList.toMutableStateList()
         }
     }
 
-    val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+    // 갤러리 런처
+    val galleryLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
         uri?.let {
             val key = selectedDate.toString()
             val currentList = imageMap[key] ?: mutableStateListOf()
             currentList.add(it)
             imageMap[key] = currentList
-            ImageStorage.saveUriList(context, key, currentList)
+            ImageStorage.saveUriList(context, userId, key, currentList)
         }
     }
 
+    // UI 구성
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
+        // 상단 로고 + 텍스트
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -77,14 +87,20 @@ fun CalendarScreen() {
             )
         }
 
-        AndroidView(factory = { android.widget.CalendarView(it) }, update = {
-            it.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
-            }
-        }, modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp))
+        // 캘린더
+        AndroidView(
+            factory = { android.widget.CalendarView(it) },
+            update = {
+                it.setOnDateChangeListener { _, year, month, dayOfMonth ->
+                    selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+        )
 
+        // 버튼
         Button(
             onClick = { galleryLauncher.launch("image/*") },
             modifier = Modifier
@@ -96,6 +112,7 @@ fun CalendarScreen() {
             Text("이 날에 입을 옷 추가하기", color = Color.Black)
         }
 
+        // 이미지 리스트
         val imagesForDate = imageMap[selectedDate.toString()] ?: emptyList()
 
         LazyVerticalGrid(
