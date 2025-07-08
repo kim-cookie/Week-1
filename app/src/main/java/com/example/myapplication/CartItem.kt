@@ -5,7 +5,7 @@ import java.io.Serializable
 data class CartItem (
     var name: String,
     var price: String,
-    var image: Int,
+    var image: String,
     var size: String,
     var quantity: Int,
     var isSelected: Boolean = false,

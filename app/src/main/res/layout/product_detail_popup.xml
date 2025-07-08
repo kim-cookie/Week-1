@@ -88,6 +88,15 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"/>
 
+    <Button
+        android:id="@+id/btnShowReviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="리뷰 보기 / 작성하기"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/orange"
+        android:textColor="@android:color/white"/>
+
     <!-- 장바구니 추가 버튼 -->
     <Button
         android:id="@+id/btnAddToCart"
