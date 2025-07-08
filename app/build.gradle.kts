@@ -48,6 +48,9 @@ android {
 }
 
 dependencies {
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
     // Compose core
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
