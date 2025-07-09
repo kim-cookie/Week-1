@@ -28,6 +28,14 @@
 
 ---
 
+### 👥 팀원 소개
+| 김재헌 | 하예영 |
+|------|------|
+| 카이스트 전산학부 | 숙명여대 데이터사이언스전공 |
+| [Github Profile](https://github.com/kim-cookie) | [Github Profile](https://github.com/hayeyoung) |
+
+---
+
 ## 🖼️ 화면 미리보기
 
 ### 🔐 로그인 / 회원가입 화면  
