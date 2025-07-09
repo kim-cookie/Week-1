@@ -111,7 +111,7 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.logo),
+            painter = painterResource(id = R.drawable.loginlogo),
             contentDescription = "앱 로고",
             modifier = Modifier
                 .size(200.dp)
