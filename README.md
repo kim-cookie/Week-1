@@ -107,11 +107,4 @@
 
 ---
 
-## 📦 APK 파일 다운로드
-
-- [🔗 APK 직접 다운로드](https://drive.google.com/...)  
-- 또는 `release/app-release.apk` 위치에 APK 업로드
-
----
-
 > 프로젝트의 개선점이나 기여 방법이 있다면 여기에 추가로 작성할 수 있습니다.
