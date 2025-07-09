@@ -113,6 +113,12 @@
 
 ---
 
+## 📦 APK 다운로드
+
+🔗 [앱 다운로드 링크](https://drive.google.com/file/d/1iHlx_z2d5pF2LlPoZ_Z-3KkfL2lWTCkh/view?usp=sharing)  
+
+---
+
 ## ✅ 개선점
 
 - 🔍 **검색 기능 고도화**: 상품명 또는 키워드를 통한 실시간 검색 기능 추가  
