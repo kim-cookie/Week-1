@@ -31,30 +31,79 @@
 
 ---
 
-## 🎥 시연 이미지 / 영상
+## 🖼️ 화면 미리보기
 
-아래는 앱 시연 이미지입니다.
+### 🔐 로그인 / 회원가입 화면  
+<img width="230" height="504" alt="Image" src="https://github.com/user-attachments/assets/be921508-4695-4c70-a911-59f661990085" />
 
-### 🖼️ 이미지
-
-| 홈 화면 | 장바구니 화면 |
-|----------|----------------|
-| ![홈](images/home.png) | ![장바구니](images/cart.png) |
-
-| 결제 화면 | 구매 내역 |
-|------------|--------------|
-| ![결제](images/payment.png) | ![내역](images/history.png) |
-
-※ `images/` 폴더는 GitHub에 함께 업로드해 주세요.
+> 사용자가 앱을 처음 사용할 때 계정을 생성하거나 로그인할 수 있는 화면입니다.  
+> SharedPreferences를 통해 사용자 정보를 관리하며, 사용자별로 데이터를 분리 저장합니다.
 
 ---
 
-## 👥 팀원 소개
+### 🏠 홈 화면 (카테고리 리스트)  
+<img width="229" height="500" alt="Image" src="https://github.com/user-attachments/assets/5e3e636d-75f1-436e-ba70-57b730953c6d" />
 
-| 이름 | 느낀점 |
-|------|------|
-| 김재헌 | 느낀점1 |
-| 하예영 | 느낀점2 |
+> 전체 상품을 카테고리 형태로 보여주는 메인 화면입니다.  
+> 각 카테고리를 클릭하면 해당 카테고리에 포함된 상품들을 보여주는 `ImageList` 화면으로 이동합니다.
+
+---
+
+### 🗂️ ImageList 화면 (카테고리별 상품 리스트)  
+<img width="230" height="498" alt="Image" src="https://github.com/user-attachments/assets/378ca656-c600-4193-b244-95defccc6a59" />
+
+> 선택된 카테고리의 상품들을 그리드 형식으로 보여줍니다.  
+> 각 상품에는 이미지, 이름, 가격, 하트(위시리스트 추가), 장바구니 버튼이 함께 표시됩니다.
+
+---
+
+### ❤️ 위시리스트 화면  
+<img width="231" height="500" alt="Image" src="https://github.com/user-attachments/assets/6f6bd012-c1ff-4a03-8e8d-ed36ead55024" />
+
+> 하트를 눌러 저장해둔 관심 상품들을 보여주는 화면입니다.  
+> 나중에 다시 보고 싶은 상품들을 간편하게 모아 관리할 수 있습니다.
+
+---
+
+### 🛒 장바구니 화면  
+<img width="230" height="498" alt="Image" src="https://github.com/user-attachments/assets/87f06197-05ba-47a3-ae29-555c7baf9530" />
+
+> 담아둔 상품 목록을 보여주는 화면입니다.  
+> 수량 변경, 항목 삭제, 선택된 상품의 총 가격 확인이 가능하며, ‘구매하기’ 버튼을 통해 결제 화면으로 이동합니다.
+
+---
+
+### 🧾 구매 내역 화면  
+<img width="228" height="496" alt="Image" src="https://github.com/user-attachments/assets/c5366681-a288-4fef-a070-974d48b668d3" />
+
+> 실제로 결제한 상품들을 날짜별로 묶어서 보여주는 화면입니다.  
+> 각 날짜의 구매 내역을 쉽게 확인할 수 있으며, 해당 상품에 대해 리뷰를 작성할 수도 있습니다.
+
+---
+
+### ⭐ 리뷰 화면  
+<img width="229" height="501" alt="Image" src="https://github.com/user-attachments/assets/e150577c-86a8-4f2b-aedf-51dea2f0512c" />
+
+<img width="230" height="504" alt="Image" src="https://github.com/user-attachments/assets/ca226ce4-d8f7-4d86-a117-e0584bbd63d6" />
+
+> 구매한 상품에 한해서 리뷰를 작성할 수 있는 화면입니다.  
+> 별점과 텍스트로 의견을 남길 수 있으며, 다른 사용자의 리뷰도 함께 확인 가능합니다.
+
+---
+
+### 📅 달력 화면  
+<img width="231" height="498" alt="Image" src="https://github.com/user-attachments/assets/662ee2c4-52a7-414f-8508-2a71f41d2da2" />
+
+> 날짜별로 그날 입은 옷이나 코디를 기록할 수 있는 코디 캘린더 화면입니다.  
+> 코디 일기처럼 사용할 수 있어 일상 속 스타일을 관리하기에 좋습니다.
+
+---
+
+### 🙋 회원 정보 화면  
+<img width="228" height="499" alt="Image" src="https://github.com/user-attachments/assets/7baeec43-856a-4c00-be92-ef0562b79f53" />
+
+> 로그인한 사용자의 이메일, 가입일, 앱 설정 정보를 확인할 수 있는 마이페이지입니다.  
+> 향후 비밀번호 변경, 로그아웃 기능 등도 이 화면에서 확장 가능하게 설계되었습니다.
 
 ---
 
