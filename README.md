@@ -1,8 +1,5 @@
 # <img width="30" height="36" alt="Image" src="https://github.com/user-attachments/assets/f1443f32-13a8-440a-bae8-3e2980cf446b" />DAYWEAR
 
-> 한 줄 소개 또는 슬로건 입력  
-(예: **"당신의 쇼핑을 더 똑똑하게 – 스마트 장바구니 앱"**)
-
 ---
 
 ## 📝 프로젝트 소개
